@@ -1,26 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+@theme {
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Font families */
+  --font-jetbrains: "JetBrains Mono", monospace;
+
+  /* Main colors */
+  --color-primary: #f59e0b;
+  --color-primary-light: var(--color-amber-300);
+  --color-primary-dark: var(--color-yellow-600);
+  --color-primary-bg: var(--color-zinc-50);
+  --color-secondary-bg: var(--color-white);
+  --color-title: hsl(0 0% 20%);
+  --color-title-dark: black;
+  --color-subTitle: #515151;
+
+  /* Shadows */
+  --shadow-top: 0px -5px 7px rgba(0, 0, 0, 0.15);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html,
+  body {
+    @apply font-jetbrains;
+    scroll-behavior: smooth;
+    scroll-padding-top: 50px;
+    position: relative;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  a,
+  button {
+    cursor: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .main-btn {
+    @apply relative inline-flex h-12 md:h-14 text-sm md:text-lg items-center justify-between gap-x-3 overflow-hidden rounded-md   bg-gradient-to-r dark:from-[#070e41] dark:to-[#263381] from-[#f6f7ff] to-[#f5f6ff] dark:border-[rgb(76_100_255)] border-2 border-[#f59e0b] bg-transparent px-4 md:px-6 font-medium dark:text-white text-black transition-all duration-100 dark:[box-shadow:5px_5px_#f59e0b] [box-shadow:5px_5px_#f59e0b] active:translate-x-[3px] active:translate-y-[3px] active:[box-shadow:0px_0px_rgb(38_51_129)] dark:active:[box-shadow:0px_0px_#f59e0b] cursor-none;
+  }
 }
+
+/* ------------- header ---------- */
+section#Home .main-content .sub-title::before {
+  width: 70px;
+  height: 1px;
+  background-color: #00000094;
+  position: absolute;
+  top: 50%;
+  transform: translate(-90px, -50%);
+}
+section#Home .main-content .sub-title::before {
+  @apply dark:bg-zinc-100;
+}
+
+/*       ------------------ header nav links animation -------------------- */
+.draw-me {
+  stroke-dasharray: 200; /* A large value to cover most paths */
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+.group:hover .draw-me {
+  stroke-dashoffset: 0;
+}
+
+/* --- Contact Icon: Flap Animation --- */
+.envelope-flap {
+  transform-origin: top center;
+  transition: transform 0.5s ease-in-out 0.4s; /* Delayed start */
+  transform: scaleY(0);
+}
+.group:hover .envelope-flap {
+  transform: scaleY(1);
+}
+/*            ---------------------- End nav links animation ------------------*/
+
+/* ------------------------ Home -----------------*/
+/* Profile picture */
+section#Home .profile-pic {
+  border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+}
+
+/* --------- End header ----------- */
+
+/* ---------------- Skills ------------------------ */
+section.Skills .skill-card {
+  @apply relative flex flex-col md:flex-row items-center text-center md:text-left gap-3 md:gap-5 items-center;
+}
+
+/*--------------------portfolio -----------*/
+section.Portfolio .project-card:hover > img {
+  transform: scale(1.3);
+}
+section.Portfolio .project-card:hover > .project-description {
+  opacity: 1;
+  visibility: visible;
+}
+/* ---------------- End Portfolio ---------------  */
+
+/*
+
+
+*/
+
+/* ------------ contact section -------------- */
+section.Contact input,
+section.Contact textarea {
+  @apply mb-8 block dark:bg-slate-900 w-full py-4 pl-5 pr-4 text-base  font-semibold rounded-xl border-[#ccc] text-title dark:text-white/90 dark:border-primary-light border-2  relative  focus:outline-black placeholder:dark:text-white/80 placeholder:font-semibold dark:caret-primary  outline-black;
+}
+section.Contact label {
+  position: absolute;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px;
+  background: linear-gradient(to bottom, #e4e4e7 50%, #ffffff 50%);
+  color: #777;
+  top: -13px;
+  left: 16px;
+}
+/* ------------ End contact section -------------- */
+
+/* 
+
+
+
+*/
+
+/* ----------------- On Scroll section Animation ----------------------*/
+
+.hidden-section:not(section#Home) {
+  opacity: 0;
+  transform: translateY(50px); /*or X for horizontal entry*/
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  pointer-events: none;
+}
+.show-section:not(section#Home) {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (min-width: 967px) {
+  footer .hidden-section {
+    transform: translateX(-500px) !important;
+  }
+  .Portfolio.hidden-section {
+    transform: translateX(-500px) !important;
+  }
+  footer .show-section {
+    transform: translateX(0px) !important;
+  }
+  .Portfolio.show-section {
+    transform: translateX(0px) !important;
+  }
+}
+
+/* ----------------- End On Scroll section Animation ------------------*/
