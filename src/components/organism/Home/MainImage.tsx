@@ -1,0 +1,19 @@
+import Image from "next/image";
+
+export default function MainImg() {
+  return (
+    <div
+      className="profile-pic relative  w-48 max-w-48 h-48 max-h-48 md:w-60 md:max-w-60 md:h-60 md:max-h-60 lg:w-80 lg:max-w-80  lg:h-80 lg:max-h-80
+      rounded-full  ring-8 ring-primary/70 overflow-hidden order-1 md:order-2
+      mx-auto -translate-x-5 my-5 md:my-5 mx-auto lg:mx-0 lg:grow-[1]"
+    >
+      <Image
+        src="/MyPic.png"
+        alt="Isaac's Picture"
+        className="w-full h-full"
+        fill={true}
+        fetchPriority="high"
+      />
+    </div>
+  );
+}
