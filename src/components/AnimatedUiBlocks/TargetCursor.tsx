@@ -20,7 +20,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   spinDuration = 2,
   hideDefaultCursor = true,
 }) => {
-  const isMobileScreen = useContext(MobileScreenContext);
   const cursorRef = useRef<HTMLDivElement>(null);
   const cornersRef = useRef<NodeListOf<HTMLDivElement>>(null);
   const spinTl = useRef<gsap.core.Timeline>(null);
@@ -346,7 +345,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
       });
     }
   }, [spinDuration]);
-  if (isMobileScreen) return;
   return (
     <div
       ref={cursorRef}
@@ -378,4 +376,11 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   );
 };
 
-export default TargetCursor;
+const TargetCursorWrapper = () => {
+  const isMobileScreen = useContext(MobileScreenContext);
+
+  if (isMobileScreen) return null;
+  return <TargetCursor spinDuration={3} hideDefaultCursor={true} />;
+};
+
+export default TargetCursorWrapper;
