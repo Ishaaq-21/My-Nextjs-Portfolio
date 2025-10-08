@@ -1,5 +1,5 @@
 import navItems, { handleNavClick } from "./NavLinks";
-export default function MobileNav({ isOpen }) {
+export default function MobileNav({ isOpen }: { isOpen: boolean }) {
   return (
     <nav
       className={`
