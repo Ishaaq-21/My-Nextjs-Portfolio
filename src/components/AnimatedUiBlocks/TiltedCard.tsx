@@ -1,0 +1,170 @@
+"use client";
+import type { SpringOptions } from "motion/react";
+import React, { useContext, useRef, useState, type ReactNode } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  type MotionValue,
+} from "framer-motion";
+import { MobileScreenContext } from "@/contexts/MobileScreenContext";
+import Image from "next/image";
+
+// Helper constant for spring animation settings
+const springValues = {
+  stiffness: 300,
+  damping: 20,
+  mass: 1,
+};
+
+// Define the type for the component's props
+interface TiltedCardProps {
+  imageSrc: string;
+  altText?: string;
+  captionText?: string;
+  scaleOnHover?: number;
+  rotateAmplitude?: number;
+  showMobileWarning?: boolean;
+  showTooltip?: boolean;
+  overlayContent?: ReactNode;
+  displayOverlayContent?: boolean;
+}
+
+const TiltedCard: React.FC<TiltedCardProps> = ({
+  imageSrc,
+  altText = "Isaac Image",
+  captionText = "Isaaq Hk",
+  scaleOnHover = 1.1,
+  rotateAmplitude = 14,
+  showMobileWarning = true,
+  showTooltip = true,
+  overlayContent = null,
+  displayOverlayContent = false,
+}) => {
+  const ref = useRef<HTMLFigureElement>(null);
+
+  // Motion values for tracking mouse position and animations
+  const x: MotionValue<number> = useMotionValue(0);
+  const y: MotionValue<number> = useMotionValue(0);
+  const rotateX: MotionValue<number> = useSpring(
+    useMotionValue(0),
+    springValues
+  );
+  const rotateY: MotionValue<number> = useSpring(
+    useMotionValue(0),
+    springValues
+  );
+  const scale: MotionValue<number> = useSpring(1, springValues);
+  const opacity: MotionValue<number> = useSpring(0);
+  const rotateFigcaption: MotionValue<number> = useSpring(0, {
+    stiffness: 350,
+    damping: 30,
+    mass: 1,
+  });
+
+  const [lastY, setLastY] = useState<number>(0);
+
+  function handleMouse(e: React.MouseEvent<HTMLFigureElement>) {
+    if (!ref.current) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left - rect.width / 2;
+    const offsetY = e.clientY - rect.top - rect.height / 2;
+
+    const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
+    const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
+
+    rotateX.set(rotationX);
+    rotateY.set(rotationY);
+
+    x.set(e.clientX - rect.left);
+    y.set(e.clientY - rect.top);
+
+    const velocityY = offsetY - lastY;
+    rotateFigcaption.set(-velocityY * 0.6);
+    setLastY(offsetY);
+  }
+
+  function handleMouseEnter() {
+    scale.set(scaleOnHover);
+    opacity.set(1);
+  }
+
+  function handleMouseLeave() {
+    opacity.set(0);
+    scale.set(1);
+    rotateX.set(0);
+    rotateY.set(0);
+    rotateFigcaption.set(0);
+  }
+
+  return (
+    <figure
+      ref={ref}
+      className="relative w-[200px] h-[200px] md:w-[270px] md:h-[300px] [perspective:800px] flex flex-col items-center justify-center"
+      onMouseMove={handleMouse}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {showMobileWarning && (
+        <div className="absolute top-4 text-center text-sm block sm:hidden">
+          This effect is not optimized for mobile. Check on desktop.
+        </div>
+      )}
+
+      <motion.div
+        className="relative w-11/12 h-full [transform-style:preserve-3d] cursor-target"
+        style={{
+          rotateX,
+          rotateY,
+          scale,
+        }}
+      >
+        <motion.img
+          src={imageSrc}
+          alt={altText}
+          loading="lazy"
+          className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)] w-full h-full shadow-[0_0_10px_1px_#f59e0b] hover:shadow-[0_0_17px_2px_#f59e0b] duration-500 transition"
+        />
+
+        {displayOverlayContent && overlayContent && (
+          <motion.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]">
+            {overlayContent}
+          </motion.div>
+        )}
+      </motion.div>
+
+      {showTooltip && (
+        <motion.figcaption
+          className={`pointer-events-none absolute left-0 top-0 rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 z-[3] hidden sm:block`}
+          style={{
+            x,
+            y,
+            opacity,
+            rotate: rotateFigcaption,
+          }}
+        >
+          {captionText}
+        </motion.figcaption>
+      )}
+    </figure>
+  );
+};
+
+const MobileImg = () => {
+  return (
+    <div className="image relative w-56 md:w-64 lg:w-80 shadow-[0_0_10px_1px_#f59e0b]  overflow-hidden rounded-3xl">
+      <Image src="/MySecPic.png" alt="My Picture" loading="lazy" fill={true} />
+    </div>
+  );
+};
+const AboutImageWrapper = () => {
+  const isMobileScreen = useContext(MobileScreenContext);
+
+  return isMobileScreen ? (
+    <MobileImg />
+  ) : (
+    <TiltedCard imageSrc="/MySecPic.png" />
+  );
+};
+export default AboutImageWrapper;
