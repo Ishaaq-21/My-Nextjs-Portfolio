@@ -192,7 +192,7 @@ const TextType = ({
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
       ...props,
     },
-    <span className="inline" style={{ color: getCurrentTextColor() }}>
+    <span className="inline text-title dark:text-white/90">
       {displayedText}
     </span>,
     showCursor && (
