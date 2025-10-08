@@ -41,7 +41,7 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
   overlayContent = null,
   displayOverlayContent = false,
 }) => {
-  const ref = useRef<HTMLFigureElement>(null);
+  const ref = useRef<HTMLFrameElement>(null);
 
   // Motion values for tracking mouse position and animations
   const x: MotionValue<number> = useMotionValue(0);
@@ -64,7 +64,7 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
 
   const [lastY, setLastY] = useState<number>(0);
 
-  function handleMouse(e: React.MouseEvent<HTMLFigureElement>) {
+  function handleMouse(e: React.MouseEvent<HTMLFrameElement>) {
     if (!ref.current) return;
 
     const rect = ref.current.getBoundingClientRect();
