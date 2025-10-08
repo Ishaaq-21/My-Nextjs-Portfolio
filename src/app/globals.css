@@ -79,10 +79,10 @@ section#Home .main-content .sub-title::before {
   top: 50%;
   transform: translate(-90px, -50%);
 }
-section#Home .main-content .sub-title::before {
-  @apply dark:bg-zinc-100;
-}
 
+section#Home .main-content .sub-title:is(.dark *)::before {
+  @apply bg-zinc-100;
+}
 /*       ------------------ header nav links animation -------------------- */
 .draw-me {
   stroke-dasharray: 200; /* A large value to cover most paths */
