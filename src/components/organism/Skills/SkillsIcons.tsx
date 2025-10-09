@@ -330,8 +330,8 @@ const NextjsIcon = () => {
 const N8nIcon = () => {
   return (
     <svg
-      height="45px"
-      width="45px"
+      height="40px"
+      width="40px"
       className="flex:none;line-height:1"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
