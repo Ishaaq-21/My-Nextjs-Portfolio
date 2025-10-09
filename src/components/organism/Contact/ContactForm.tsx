@@ -1,9 +1,12 @@
 "use client";
-import PopupCard from "@/components/atoms/SuccessfullPopUp";
 import { useForm, ValidationError } from "@formspree/react";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 
+const PopupCard = dynamic(() => import("@/components/atoms/SuccessfullPopUp"), {
+  ssr: false,
+});
 type formInputsState = {
   name: string;
   email: string;
@@ -123,8 +126,8 @@ export default function ContactForm() {
       </form>
       <PopupCard
         isOpen={formSent}
-        name={formInputsObj.name}
         onClose={handlePopUpClosing}
+        name={formInputsObj.name}
       />
     </div>
   );
