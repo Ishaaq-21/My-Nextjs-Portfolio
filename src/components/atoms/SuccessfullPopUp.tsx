@@ -1,6 +1,13 @@
+"use client";
 import { createPortal } from "react-dom";
 
-const PopupCard = ({ isOpen, onClose, name }) => {
+type PopupCardType = {
+  isOpen: boolean;
+  onClose: () => void;
+  name: string;
+};
+
+const PopupCard = ({ isOpen, onClose, name }: PopupCardType) => {
   return createPortal(
     // Popup Overlay
     <div
