@@ -13,6 +13,7 @@ export default function MainImg() {
         className="w-full h-full"
         fill={true}
         fetchPriority="high"
+        priority
       />
     </div>
   );
