@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Project } from "./ProjectsData";
+import Link from "next/link";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
@@ -23,7 +24,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
         <div className="links flex gap-4">
-          <a
+          <Link
             rel="noopener noreferrer"
             href={project.github}
             target="_blank"
@@ -31,9 +32,9 @@ export default function ProjectCard({ project }: { project: Project }) {
             aria-label={`View the ${project.name} project on GitHub`} // Add this
           >
             <i className="uil uil-github text-primary text-4xl"></i>
-          </a>
+          </Link>
           {project.demo && (
-            <a
+            <Link
               rel="noopener noreferrer"
               href={project.demo}
               target="_blank"
@@ -41,7 +42,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               aria-label={`View the live demo for the ${project.name} project`} // Add this
             >
               <i className="uil uil-eye text-primary text-4xl"></i>
-            </a>
+            </Link>
           )}
         </div>
       </div>
