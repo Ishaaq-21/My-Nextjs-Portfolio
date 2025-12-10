@@ -11,7 +11,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 export const metadata: Metadata = {
-  title: "Isaaq Portfolio",
+  title: "Isaac Portfolio",
   description:
     "Creative frontend developer passionate about building smart, responsive, and user-focused web experiences. Specializing in React, TypeScript, Next.js, and modern web technologies.",
   keywords: [
@@ -25,18 +25,18 @@ export const metadata: Metadata = {
     "Tailwind CSS",
     "Responsive Design",
     "UI/UX",
-    "Isaaq Hk",
+    "Isaac Hk",
     "Portfolio",
   ],
-  authors: [{ name: "Isaaq Hk" }],
-  creator: "Isaaq Hk",
-  publisher: "Isaaq Hk",
+  authors: [{ name: "Isaac Hk" }],
+  creator: "Isaac Hk",
+  publisher: "Isaac Hk",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://isaaq-hk.is-a.dev/",
-    siteName: "Isaaq Hk Portfolio",
-    title: "Isaaq Portfolio",
+    siteName: "Isaac Hk Portfolio",
+    title: "Isaac Portfolio",
     description:
       "Creative frontend developer passionate about building smart, responsive, and user-focused web experiences.",
     images: [
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
         url: "/MyPic.png",
         width: 1200,
         height: 630,
-        alt: "Isaaq Hk - Frontend Developer",
+        alt: "Isaac Hk - Frontend Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Isaaq Hk - Frontend Developer & Software Engineer",
+    title: "Isaac Hk - Frontend Developer & Software Engineer",
     description:
       "Creative frontend developer passionate about building smart, responsive, and user-focused web experiences.",
     images: ["/MyPic.png"],
