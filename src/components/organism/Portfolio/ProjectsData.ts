@@ -19,6 +19,16 @@ const projectsData: Project[] = [
     github: "https://github.com/Ishaaq-21/Driving-Management-System-",
   },
   {
+    iconPng: "/Projects/shopcart.png",
+    iconAvif: "/Projects/shopcart.avif",
+    type: "Nextjs",
+    name: "Shopcart E-commerce",
+    description:
+      "A Next.js e-commerce platform with product listings, cart management, user authentication, and secure payment processing.",
+    demo: "https://shopcart-project.vercel.app/",
+    github: "https://github.com/Ishaaq-21/Shopcart-ecommerce-store",
+  },
+  {
     iconPng: "/Projects/voyanta.png",
     iconAvif: "/Projects/voyanta.avif",
     type: "Nextjs",
@@ -29,6 +39,15 @@ const projectsData: Project[] = [
     github: "https://github.com/Ishaaq-21/Voyanta-project",
   },
   {
+    iconPng: "/Projects/Portfolio.png",
+    iconAvif: "/Projects/Portfolio.avif",
+    type: "Nextjs",
+    name: "My Portfolio",
+    description:
+      "A sleek, responsive web portfolio to showcase my projects, skills, and background, built with modern web technologies.",
+    github: "https://github.com/Ishaaq-21/My-Nextjs-Portfolio",
+  },
+  {
     iconPng: "/Projects/PrayerTimes.png",
     iconAvif: "/Projects/PrayerTimes.avif",
     type: "react",
@@ -37,15 +56,6 @@ const projectsData: Project[] = [
       "Responsive app showing global prayer times, live clock, countdown, multilingual support, and AI Islamic assistant.",
     demo: "https://prayer-times-for-muslims.netlify.app/",
     github: "https://github.com/Ishaaq-21/Prayer-Times-React-App",
-  },
-  {
-    iconPng: "/Projects/Portfolio.png",
-    iconAvif: "/Projects/Portfolio.avif",
-    type: "Nextjs",
-    name: "My Portfolio",
-    description:
-      "A sleek, responsive web portfolio to showcase my projects, skills, and background, built with modern web technologies.",
-    github: "https://github.com/Ishaaq-21/My-Nextjs-Portfolio",
   },
 
   {
