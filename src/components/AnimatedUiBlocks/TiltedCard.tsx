@@ -153,7 +153,7 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
 
 const MobileImg = () => {
   return (
-    <div className="image relative w-56 md:w-64 lg:w-80 shadow-[0_0_10px_1px_#f59e0b]  overflow-hidden rounded-3xl">
+    <div className="image relative w-56 h-60 md:h-auto md:w-64 lg:w-80 shadow-[0_0_10px_1px_#f59e0b]  overflow-hidden rounded-3xl">
       <Image src="/MySecPic.png" alt="My Picture" loading="lazy" fill={true} />
     </div>
   );
